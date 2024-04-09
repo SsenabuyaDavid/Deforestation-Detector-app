@@ -7,11 +7,12 @@ import 'package:flutter_fft/flutter_fft.dart';
 import 'package:record/record.dart';
 import 'package:tflite_flutter/tflite_flutter.dart'; // Import TensorFlow Lite package
 
+import 'LocationPage.dart';
 import 'audio_list_page.dart'; // Adjust the path if necessary
 
 void main() {
   runApp(
-    MaterialApp(
+    const MaterialApp(
       title: 'Deforestation Detector',
       debugShowCheckedModeBanner: false,
       home: MyApp(),
@@ -115,8 +116,13 @@ class _AudioRecorderAppState extends State<AudioRecorderApp> {
       stopRecording();
     });
 
+    // Provide the base directory path
+    String basePath = 'storage/emulated/0/Music/';
+    // Concatenate the base path with the formatted file name
+    String filePath = basePath + getFormattedFileName(fileCounter);
+    // Start recording with the dynamically generated file path
     await audioRecorder.start(
-      path: 'storage/emulated/0/Download/${getFormattedFileName(fileCounter)}',
+      path: filePath,
       encoder: AudioEncoder.wav,
     );
 
@@ -148,41 +154,46 @@ class _AudioRecorderAppState extends State<AudioRecorderApp> {
     await performInference();
   }
 
- Future<void> performInference() async {
-  // Load the model
-  Interpreter interpreter = await Interpreter.fromAsset('model.tflite');
-  interpreter.allocateTensors();
+  Future<void> performInference() async {
+    // Load the model
+    Interpreter interpreter = await Interpreter.fromAsset('model.tflite');
+    interpreter.allocateTensors();
 
-  // Assuming inference involves loading an audio file and obtaining predictions
-  // Example code for audio classification
+    // Assuming inference involves loading an audio file and obtaining predictions
+    // Example code for audio classification
 
-  // Provide the path to the audio file
-  String audioFilePath = 'path/to/audio.wav';
+    // Provide the path to the audio file
+    // Provide the base directory path
+    String basePath = 'storage/emulated/0/Music/';
+    // Concatenate the base path with the formatted file name
+    String filePath = basePath + getFormattedFileName(fileCounter);
+    // Start recording with the dynamically generated file path
+    String audioFilePath = filePath;
 
-  // Read the audio file as bytes
-  List<int> audioBytes = File(audioFilePath).readAsBytesSync();
+    // Read the audio file as bytes
+    List<int> audioBytes = File(audioFilePath).readAsBytesSync();
 
-  // Prepare input tensor
-  // Replace 'inputTensorIndex' and 'inputTensorShape' with your model's input tensor index and shape
-  interpreter.setInputTensors([audioBytes]);
+    // Prepare input tensor
+    // Replace 'inputTensorIndex' and 'inputTensorShape' with your model's input tensor index and shape
+    //interpreter.setInputTensors([audioBytes]);
 
-  // Perform inference
-  interpreter.invoke();
+    // Perform inference
+    interpreter.invoke();
 
-  // Get output tensor
-  // Replace 'outputTensorIndex' and 'outputTensorShape' with your model's output tensor index and shape
-  List output = interpreter.getOutputTensors();
-  var predictions = output[0]; // Assuming only one output tensor
+    // Get output tensor
+    // Replace 'outputTensorIndex' and 'outputTensorShape' with your model's output tensor index and shape
+    List output = interpreter.getOutputTensors();
+    var predictions = output[0]; // Assuming only one output tensor
 
-  // Process model outputs here
-  // For example, check if the prediction is above a certain threshold
-  double threshold = 0.5; // Adjust this threshold as per your model's output
-  if (predictions[0] > threshold) {
-    // The model predicts the presence of deforestation sounds
-    // Send a positive message
-    composeEmailMessage('Deforestation detected');
+    // Process model outputs here
+    // For example, check if the prediction is above a certain threshold
+    double threshold = 0.5; // Adjust this threshold as per your model's output
+    if (predictions[0] > threshold) {
+      // The model predicts the presence of deforestation sounds
+      // Send a positive message
+      composeEmailMessage('Deforestation detected');
+    }
   }
-}
 
   void composeEmailMessage(String prediction) {
     // Compose email message based on prediction
@@ -220,7 +231,7 @@ class _AudioRecorderAppState extends State<AudioRecorderApp> {
   }
 
   void pickAudioSongFromInternal() {
-    Directory dir = Directory('/storage/emulated/0/Download');
+    Directory dir = Directory('/storage/emulated/0/Music');
     List<FileSystemEntity> files;
     files = dir.listSync(recursive: true, followLinks: false);
     for (FileSystemEntity entity in files) {
@@ -229,26 +240,26 @@ class _AudioRecorderAppState extends State<AudioRecorderApp> {
         songs.add(entity);
       }
     }
-    
+
     // Generate file names if there are no songs yet
-  if (songs.isEmpty) {
-    for (int i = 0; i < 111111112; i++) {
-      String fileName = getFormattedFileName(i);
-      File newFile = File(dir.path + '/$fileName');
-      if (!newFile.existsSync()) {
-        // Stop generating file names once the first non-existing file is found
-        break;
+    if (songs.isEmpty) {
+      for (int i = 0; i < 111111112; i++) {
+        String fileName = getFormattedFileName(i);
+        File newFile = File('${dir.path}/$fileName');
+        if (!newFile.existsSync()) {
+          // Stop generating file names once the first non-existing file is found
+          break;
+        }
+        songs.add(newFile);
       }
-      songs.add(newFile);
     }
+
+    setState(() {});
   }
-  
-  setState(() {});
-}
 
   String getFormattedFileName(int number) {
     // Format the number with leading zeros
-    return number.toString().padLeft(10, '0') + '.wav';
+    return '${number.toString().padLeft(10, '0')}.wav';
   }
 
   @override
@@ -281,7 +292,7 @@ class _AudioRecorderAppState extends State<AudioRecorderApp> {
                     });
                     await audioRecorder.start(
                       path:
-                          'storage/emulated/0/Download/${getFormattedFileName(fileCounter)}',
+                          'storage/emulated/0/Music/${getFormattedFileName(fileCounter)}',
                       encoder: AudioEncoder.wav,
                     );
                   }
@@ -308,16 +319,16 @@ class _AudioRecorderAppState extends State<AudioRecorderApp> {
 
                   // Assuming you have a variable that stores the path of the most recent recording
                   String mostRecentRecordingPath =
-                      'path/to/most_recent_recording.wav';
+                      'storage/emulated/0/Music/${getFormattedFileName(fileCounter)}';
 
                   // Check if the file exists before attempting to play
                   if (await File(mostRecentRecordingPath).exists()) {
                     Audio audio = Audio.file(
                       mostRecentRecordingPath,
                       metas: Metas(
-                        title: 'Audio Title', // Replace with the actual title
-                        artist:
-                            'Artist Name', // Replace with the actual artist
+                        title: getFormattedFileName(
+                            fileCounter), // Replace with the actual title
+                        //artist: 'Artist Name', // Replace with the actual artist
                       ),
                     );
 
@@ -351,6 +362,16 @@ class _AudioRecorderAppState extends State<AudioRecorderApp> {
           ),
           OutlinedButton(
             onPressed: () {
+              // Navigate to the LocationPage when the button is pressed
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LocationPage()),
+              );
+            },
+            child: const Text('Get Device Location'),
+          ),
+          OutlinedButton(
+            onPressed: () {
               pickAudioSongFromInternal();
               Navigator.push(
                 context,
@@ -366,4 +387,3 @@ class _AudioRecorderAppState extends State<AudioRecorderApp> {
     );
   }
 }
-
