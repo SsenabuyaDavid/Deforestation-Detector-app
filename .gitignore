@@ -17,6 +17,8 @@
 .vscode/
 build/app/outputs/apk/
 build/
+build/app/outputs/apk/debug/app-debug.apk
+build/app/outputs/apk/debug/app-debug.apk
 
 # IDE/Editor specific
 .idea/
