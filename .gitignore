@@ -19,7 +19,7 @@ build/app/outputs/apk/
 build/
 build/app/outputs/apk/debug/app-debug.apk
 build/app/outputs/apk/debug/app-debug.apk
-
+assets
 # IDE/Editor specific
 .idea/
 *.iml
