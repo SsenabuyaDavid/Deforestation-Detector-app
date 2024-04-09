@@ -1,0 +1,57 @@
+# Dart and Flutter specific
+**/build/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub/
+.pub-cache/
+/build/
+.dart_tool/
+/ios/Pods/
+/android/.gradle/
+/android/app/build/
+/android/gradle/
+/ios/Flutter/Flutter.podspec
+.vscode/
+
+# IDE/Editor specific
+.idea/
+*.iml
+*.ipr
+*.iws
+*.log
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/shelf/
+
+# macOS specific
+.DS_Store
+*.DS_Store
+
+# Windows specific
+Thumbs.db
+
+# Android/Gradle specific
+*/.gradle
+*/local.properties
+*/GeneratedPluginRegistrant.java
+
+# iOS specific
+*/ios/Flutter/Flutter.framework/
+*/ios/Flutter/Flutter.podspec
+*/ios/.symlinks/
+*/ios/Flutter/App.framework/
+*/ios/Flutter/Generated.xcconfig
+*/ios/Flutter/App.generated.xcconfig
+*/ios/Flutter/flutter_assets/
+*/ios/Flutter/ephemeral/.plugin_symlinks/
+*/ios/Flutter/ephemeral/flutter_export_environment.sh
+
+# Crashlytics
+/crashlytics.properties
+
+# KeyStore files
+*.jks
