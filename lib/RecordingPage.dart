@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fft/flutter_fft.dart';
-import 'package:record/record.dart';
+import 'package:record/record.dart'; //for recording
 
 class RecordingPage extends StatefulWidget {
   const RecordingPage({Key? key}) : super(key: key);
