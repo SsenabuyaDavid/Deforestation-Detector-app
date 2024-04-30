@@ -1,6 +1,6 @@
 {
-    "name": "record_audio_with_mic_and_spectogram_of_audio",
-    "short_name": "record_audio_with_mic_and_spectogram_of_audio",
+    "name": "newproject",
+    "short_name": "newproject",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

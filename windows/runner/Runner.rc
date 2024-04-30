@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "record_audio_with_mic_and_spectogram_of_audio" "\0"
+            VALUE "FileDescription", "newproject" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "record_audio_with_mic_and_spectogram_of_audio" "\0"
+            VALUE "InternalName", "newproject" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2024 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "record_audio_with_mic_and_spectogram_of_audio.exe" "\0"
-            VALUE "ProductName", "record_audio_with_mic_and_spectogram_of_audio" "\0"
+            VALUE "OriginalFilename", "newproject.exe" "\0"
+            VALUE "ProductName", "newproject" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

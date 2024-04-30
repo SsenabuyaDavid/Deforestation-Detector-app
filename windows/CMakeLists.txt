@@ -1,10 +1,10 @@
 # Project-level configuration.
 cmake_minimum_required(VERSION 3.14)
-project(record_audio_with_mic_and_spectogram_of_audio LANGUAGES CXX)
+project(newproject LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-set(BINARY_NAME "record_audio_with_mic_and_spectogram_of_audio")
+set(BINARY_NAME "newproject")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.
