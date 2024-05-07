@@ -21,6 +21,7 @@ class _RecordingPageState extends State<RecordingPage> {
   String _text = '---';
   late FlutterFft _flutterFft;
   late AssetsAudioPlayer _assetsAudioPlayer;
+  Timer? _recordingTimer; // Define the recording timer
 
   @override
   void initState() {
@@ -65,7 +66,14 @@ class _RecordingPageState extends State<RecordingPage> {
         path:
             'storage/emulated/0/Download/recording${_recordedAudios.length + 1}.wav',
         encoder: AudioEncoder.wav,
+        samplingRate: 16000, // Specify the desired sample rate (e.g., 16 kHz)
       );
+
+      // Start a timer to stop recording after 10 seconds
+      _recordingTimer = Timer(const Duration(seconds: 10), () async {
+        await _stopRecording();
+      });
+
       _flutterFft.startRecorder();
     } else {
       print('Permission denied');

@@ -32,11 +32,17 @@ dependencies:
   flutter:
     sdk: flutter
   path_provider: ^2.0.11 # Update with the latest version if needed
+  # file_picker: ^4.0.0
     
   #tflite: ^1.1.2 # Example version, use the latest available
   #tflite_flutter: ^0.10.4
   geolocator: ^8.2.0
-  file_picker: ^4.0.0
+  # file_picker: ^4.0.0
+  # sound_stream: ^0.4.1
+  onnxruntime: ^1.4.1
+  
+
+  
 
 
 
@@ -45,20 +51,20 @@ dependencies:
   cupertino_icons: ^1.0.2
   assets_audio_player: ^3.1.1
   record: ^4.4.4
-  flutter_fft: ^1.0.2+6
+  # flutter_fft: ^1.0.2+6
   # to enable the app play audio. Can be removed to decrease app size
-  audioplayers: ^0.20.1  
-  # tflite_flutter_plus: ^0.0.1
+  audioplayers:   
+
   tflite_audio: ^0.3.0
   mailer: ^6.1.0
   permission_handler: ^11.3.1 # Update with latest version if needed
+  flutter_fft: ^1.0.2+6
+  # fftea: ^1.5.0
+  
 
-#  flutter_neumorphic: ^3.2.0
-#  just_audio: ^0.9.31
-#  rxdart: ^0.27.3
-#  uuid: ^3.0.5
-#  http: ^0.13.4 # to download / cache network files
-#  path_provider: ^2.0.8
+
+
+
 
 dev_dependencies:
   flutter_test:
@@ -83,9 +89,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/models/chainsaw_detection.onnx
+    - assets/models/labels.txt
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
